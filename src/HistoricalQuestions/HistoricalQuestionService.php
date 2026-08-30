@@ -16,17 +16,25 @@ final class HistoricalQuestionService
 
     public function ask(HistoricalQuestion $question): HistoricalAnswerResult
     {
+        return $this->askWithEvidence($question)->result;
+    }
+
+    public function askWithEvidence(HistoricalQuestion $question): HistoricalInterpretationPackage
+    {
         $evidence = $this->retriever->retrieve($question);
 
         if (! $evidence->isSufficient()) {
-            return HistoricalAnswerResult::refused(
-                new RefusalReason(
-                    code: 'insufficient_evidence',
-                    message: 'Cannot interpret historical state without sufficient evidence.',
-                ),
-                new CompletenessAssessment(
-                    hasSufficientEvidence: false,
-                    missingExpectedEvidence: $evidence->missingExpectedEvidence,
+            return new HistoricalInterpretationPackage(
+                evidence: $evidence,
+                result: HistoricalAnswerResult::refused(
+                    new RefusalReason(
+                        code: 'insufficient_evidence',
+                        message: 'Cannot interpret historical state without sufficient evidence.',
+                    ),
+                    new CompletenessAssessment(
+                        hasSufficientEvidence: false,
+                        missingExpectedEvidence: $evidence->missingExpectedEvidence,
+                    ),
                 ),
             );
         }
@@ -35,7 +43,10 @@ final class HistoricalQuestionService
         $this->guardTraceability($answer, $evidence);
         $answer = $this->normalizeCompletenessAndUncertainty($answer, $evidence);
 
-        return HistoricalAnswerResult::answered($answer);
+        return new HistoricalInterpretationPackage(
+            evidence: $evidence,
+            result: HistoricalAnswerResult::answered($answer),
+        );
     }
 
     private function guardTraceability(HistoricalAnswer $answer, EvidenceSet $evidence): void

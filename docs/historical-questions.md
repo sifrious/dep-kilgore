@@ -37,3 +37,12 @@ Completeness and uncertainty are first-class output structures and cannot be sup
 - Confidence does not replace or hide uncertainty.
 
 Path, filesystem location, and SHA are contextual metadata, not identity.
+
+## Period summaries
+
+Period summaries use the same deterministic retrieval-first pipeline and return typed, cited results over an explicit period boundary:
+
+- Evidence is selected by requested period start/end when timestamps are available.
+- Observations (fact assertions) and interpretations (inference/hypothesis assertions) remain distinct.
+- Output is grouped chronologically (`YYYY-MM-DD`) with an `undated` bucket when event time is missing or intentionally uncited hypotheses are present.
+- Missing expected history and uncertain timing remain visible through uncertainty signals.

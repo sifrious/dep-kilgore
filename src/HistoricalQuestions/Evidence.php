@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Sifrious\Kilgore\HistoricalQuestions;
 
+use DateTimeImmutable;
+
 enum EvidenceKind: string
 {
     case Comparison = 'comparison';
@@ -19,6 +21,7 @@ final class EvidenceItem
         public readonly string $funesRef,
         public readonly EvidenceKind $kind,
         public readonly string $summary,
+        public readonly ?DateTimeImmutable $occurredAt = null,
     ) {
     }
 }
@@ -51,5 +54,19 @@ final class EvidenceSet
                 $this->items,
             ),
         );
+    }
+
+    /**
+     * @return array<non-empty-string, EvidenceItem>
+     */
+    public function byRef(): array
+    {
+        $indexed = [];
+
+        foreach ($this->items as $item) {
+            $indexed[$item->funesRef] = $item;
+        }
+
+        return $indexed;
     }
 }
