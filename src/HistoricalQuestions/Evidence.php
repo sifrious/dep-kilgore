@@ -17,11 +17,15 @@ enum EvidenceKind: string
 
 final class EvidenceItem
 {
+    /**
+     * @param array<string, scalar|null> $attributes
+     */
     public function __construct(
         public readonly string $funesRef,
         public readonly EvidenceKind $kind,
         public readonly string $summary,
         public readonly ?DateTimeImmutable $occurredAt = null,
+        public readonly array $attributes = [],
     ) {
     }
 }

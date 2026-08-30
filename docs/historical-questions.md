@@ -70,3 +70,8 @@ Traversal uncertainty (for missing relationship evidence or sparse edges) remain
 
 Current project state explanation composes current-vs-prior comparisons and project timelines to explain *why* the project is in its present state.
 It keeps facts, explicit inferences, contradiction signals, citations, and uncertainty distinct so applications only select project scope and render.
+
+## Past decision context
+
+Past decision context reconstructs the surrounding historical rationale for a decision from Funes provenance.
+It keeps recorded rationale distinct from later inference, preserves author as account id, links identities via `funes_ref`/stack identity, and models decision-citation edges with label/locator/position semantics.

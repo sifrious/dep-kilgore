@@ -102,3 +102,4 @@ It also applies to current-versus-prior state comparison: retrieve baseline/curr
 Project timelines follow the same rule: retrieve structured Funes evidence first, then emit chronological, citation-linked observation/interpretation layers with explicit temporal semantics and uncertainty.
 Entity timelines extend this by scoping to opaque entity Funes refs and traversing cited relationships before rendering grouped timeline layers.
 Current project state explanations compose state comparison and timeline reasoning with explicit inferences, contradiction surfacing, citations, and unsuppressible uncertainty.
+Past decision context reconstruction follows the same retrieve-first rule while separating recorded rationale from later inference and preserving citation/link identity through Funes refs and stack identity.
