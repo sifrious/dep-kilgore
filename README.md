@@ -1,5 +1,9 @@
 # Kilgore
 
+> **License:** Copyright © 2026 Sifrious. All rights reserved. This is
+> publicly viewable proprietary software, not open-source software. See
+> [LICENSE.md](LICENSE.md).
+
 ## Why “Kilgore”?
 
 Kilgore is named after Kilgore Trout, Kurt Vonnegut’s fictional science-fiction writer: an observer who takes scattered, ordinary details and turns them into explanations of the strange systems people live inside.
