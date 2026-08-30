@@ -80,3 +80,8 @@ It keeps recorded rationale distinct from later inference, preserves author as a
 
 Left-off context answers what work was in progress at the last confirmed episode in bounded history.
 It combines explicit boundary detection, active-work reconstruction, evidence ranking, unresolved-context extraction, citations, and inference/uncertainty so resume UI can remain presentation-only.
+
+## Decision rationale answers
+
+Decision rationale answers reconstruct why a choice was made from recorded decision context, alternatives, and provenance citations.
+Recorded rationale remains distinct from later inference, and missing rationale details remain visible as explicit uncertainty.

@@ -104,3 +104,4 @@ Entity timelines extend this by scoping to opaque entity Funes refs and traversi
 Current project state explanations compose state comparison and timeline reasoning with explicit inferences, contradiction surfacing, citations, and unsuppressible uncertainty.
 Past decision context reconstruction follows the same retrieve-first rule while separating recorded rationale from later inference and preserving citation/link identity through Funes refs and stack identity.
 Left-off context uses bounded history to detect the last confirmed work episode, reconstruct active work with cited evidence, rank context, and expose unresolved inferences/uncertainty for safe resumption.
+Decision rationale answers explain why a decision was chosen by reusing past decision context, preserving recorded-vs-inferred rationale separation, cited alternatives, and explicit uncertainty when rationale is incomplete.
