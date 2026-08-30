@@ -60,3 +60,8 @@ Project timelines reuse retrieval-first interpretation and chronological groupin
 - interpretation layer: inferences/hypotheses with explicit support linkage
 
 Timeline groups carry explicit temporal semantics (`exact_date` or `undated`) with citations and unsuppressible uncertainty.
+
+## Entity timelines
+
+Entity timelines scope history by opaque `entityFunesRef`, traverse related entities with cited provenance, and build chronological layered events from that expanded evidence scope.
+Traversal uncertainty (for missing relationship evidence or sparse edges) remains explicit and cannot be suppressed.
