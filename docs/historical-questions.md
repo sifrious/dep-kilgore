@@ -51,3 +51,12 @@ Period summaries use the same deterministic retrieval-first pipeline and return 
 
 Current-versus-prior state comparisons apply explicit temporal baselines and produce typed change classifications (`added`, `removed`, `persisted`) with Funes citations.
 Kilgore owns baseline interpretation, evidence linkage, change classification, and uncertainty propagation; applications only choose scope/baseline and render results.
+
+## Project timelines
+
+Project timelines reuse retrieval-first interpretation and chronological grouping to produce layered events:
+
+- observation layer: evidence-backed facts
+- interpretation layer: inferences/hypotheses with explicit support linkage
+
+Timeline groups carry explicit temporal semantics (`exact_date` or `undated`) with citations and unsuppressible uncertainty.

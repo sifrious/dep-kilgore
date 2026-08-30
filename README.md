@@ -99,3 +99,4 @@ Path, file location, and SHA are context only. They are never historical identit
 
 The same contract applies to period summaries: retrieve cited Funes evidence first, then produce chronological observations and interpretations with explicit uncertainty.
 It also applies to current-versus-prior state comparison: retrieve baseline/current evidence first, then classify state changes with traceable citations and explicit uncertainty.
+Project timelines follow the same rule: retrieve structured Funes evidence first, then emit chronological, citation-linked observation/interpretation layers with explicit temporal semantics and uncertainty.
