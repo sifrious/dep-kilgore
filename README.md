@@ -85,3 +85,14 @@ Kilgore can build project vocabulary, relationships, state summaries, and knowle
 Kilgore is in early development. Its public contracts and first end-to-end capability are being defined around a narrow standard: retrieve historical evidence, produce typed and traceable assertions, report completeness, and rebuild the interpretation without altering the underlying history.
 
 Installation and usage instructions will be added when that first supported release is available.
+
+## Deterministic retrieval before prose
+
+Kilgore's public contract requires deterministic, structured history retrieval before any model interpretation prose:
+
+1. Retrieve a provenance-bearing evidence set from Funes.
+2. Validate evidence sufficiency and visible gaps.
+3. Interpret only against that explicit evidence set.
+4. Return typed answers where facts remain citation-backed and hypotheses stay explicitly labeled.
+
+Path, file location, and SHA are context only. They are never historical identity.

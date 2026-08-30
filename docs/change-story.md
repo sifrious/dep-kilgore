@@ -26,7 +26,9 @@
   - `subjectId`: optional subject identity.
 - `ResearchClaimSource`
   - `claim`: interpreted claim.
+  - `kind`: epistemic status (`fact`, `opinion`, `synthesis`, `dissent`, `implication`).
   - `funesRefs`: cited supporting evidence refs.
   - `subjectId`: optional subject identity.
 
 The contract keeps interpretation and source evidence distinguishable: assertions may summarize, but cited evidence remains explicit and traceable.
+These `kind` values are interpretation semantics, not a copied table schema from another repository.

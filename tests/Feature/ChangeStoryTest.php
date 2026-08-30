@@ -6,6 +6,7 @@ use Sifrious\Kilgore\ChangeStory\ChangeStory;
 use Sifrious\Kilgore\ChangeStory\Comparison;
 use Sifrious\Kilgore\ChangeStory\DecisionCitation;
 use Sifrious\Kilgore\ChangeStory\PlanSummary;
+use Sifrious\Kilgore\ChangeStory\ResearchClaimKind;
 use Sifrious\Kilgore\ChangeStory\ResearchClaimSource;
 
 it('preserves the change story interpretation contract with funes identity', function (): void {
@@ -35,6 +36,7 @@ it('preserves the change story interpretation contract with funes identity', fun
             new ResearchClaimSource(
                 claim: 'Interpretations should be replaceable snapshots.',
                 funesRefs: ['funes:research:001'],
+                kind: ResearchClaimKind::Synthesis,
             ),
         ],
     );
@@ -44,5 +46,6 @@ it('preserves the change story interpretation contract with funes identity', fun
         ->and($story->comparisons[0]->funesRefs)->toBe(['funes:cmp:001'])
         ->and($story->decisionCitations)->toHaveCount(1)
         ->and($story->planSummaries)->toHaveCount(1)
-        ->and($story->researchClaimSources)->toHaveCount(1);
+        ->and($story->researchClaimSources)->toHaveCount(1)
+        ->and($story->researchClaimSources[0]->kind)->toBe(ResearchClaimKind::Synthesis);
 });

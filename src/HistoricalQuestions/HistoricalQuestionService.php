@@ -33,6 +33,7 @@ final class HistoricalQuestionService
 
         $answer = $this->interpreter->interpret($question, $evidence);
         $this->guardTraceability($answer, $evidence);
+        $answer = $this->normalizeCompletenessAndUncertainty($answer, $evidence);
 
         return HistoricalAnswerResult::answered($answer);
     }
@@ -54,5 +55,47 @@ final class HistoricalQuestionService
                 }
             }
         }
+
+        foreach ($answer->claims as $claim) {
+            if ($claim->assertionType === ClaimAssertionType::Fact && $claim->funesRefs === []) {
+                throw new DomainException('Fact claims must cite at least one Funes ref.');
+            }
+
+            foreach ($claim->funesRefs as $funesRef) {
+                if (! array_key_exists($funesRef, $availableRefs)) {
+                    throw new DomainException(
+                        sprintf('Claim cites unknown Funes ref: %s', $funesRef),
+                    );
+                }
+            }
+        }
+    }
+
+    private function normalizeCompletenessAndUncertainty(HistoricalAnswer $answer, EvidenceSet $evidence): HistoricalAnswer
+    {
+        $missingExpectedEvidence = array_values(array_unique(array_merge(
+            $evidence->missingExpectedEvidence,
+            $answer->completeness->missingExpectedEvidence,
+            $answer->uncertainty->missingExpectedEvidence,
+        )));
+
+        $hasSufficientEvidence = $answer->completeness->hasSufficientEvidence && $evidence->isSufficient();
+        $signals = $answer->uncertainty->signals;
+
+        if ($missingExpectedEvidence !== []) {
+            $signals[] = 'missing_expected_history';
+            $signals = array_values(array_unique($signals));
+        }
+
+        return $answer->withCompletenessAndUncertainty(
+            completeness: new CompletenessAssessment(
+                hasSufficientEvidence: $hasSufficientEvidence,
+                missingExpectedEvidence: $missingExpectedEvidence,
+            ),
+            uncertainty: new UncertaintyAssessment(
+                missingExpectedEvidence: $missingExpectedEvidence,
+                signals: $signals,
+            ),
+        );
     }
 }

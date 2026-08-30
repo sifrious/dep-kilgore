@@ -79,6 +79,15 @@ final class PlanSummary
     }
 }
 
+enum ResearchClaimKind: string
+{
+    case Fact = 'fact';
+    case Opinion = 'opinion';
+    case Synthesis = 'synthesis';
+    case Dissent = 'dissent';
+    case Implication = 'implication';
+}
+
 final class ResearchClaimSource
 {
     /**
@@ -87,6 +96,7 @@ final class ResearchClaimSource
     public function __construct(
         public readonly string $claim,
         public readonly array $funesRefs,
+        public readonly ResearchClaimKind $kind = ResearchClaimKind::Synthesis,
         public readonly ?string $subjectId = null,
     ) {
         Comparison::guardRefs($this->funesRefs);
