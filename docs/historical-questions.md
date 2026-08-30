@@ -46,3 +46,8 @@ Period summaries use the same deterministic retrieval-first pipeline and return 
 - Observations (fact assertions) and interpretations (inference/hypothesis assertions) remain distinct.
 - Output is grouped chronologically (`YYYY-MM-DD`) with an `undated` bucket when event time is missing or intentionally uncited hypotheses are present.
 - Missing expected history and uncertain timing remain visible through uncertainty signals.
+
+## Current versus prior state
+
+Current-versus-prior state comparisons apply explicit temporal baselines and produce typed change classifications (`added`, `removed`, `persisted`) with Funes citations.
+Kilgore owns baseline interpretation, evidence linkage, change classification, and uncertainty propagation; applications only choose scope/baseline and render results.

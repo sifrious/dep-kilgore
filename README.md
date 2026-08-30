@@ -98,3 +98,4 @@ Kilgore's public contract requires deterministic, structured history retrieval b
 Path, file location, and SHA are context only. They are never historical identity.
 
 The same contract applies to period summaries: retrieve cited Funes evidence first, then produce chronological observations and interpretations with explicit uncertainty.
+It also applies to current-versus-prior state comparison: retrieve baseline/current evidence first, then classify state changes with traceable citations and explicit uncertainty.
