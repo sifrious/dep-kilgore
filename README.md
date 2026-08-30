@@ -103,3 +103,4 @@ Project timelines follow the same rule: retrieve structured Funes evidence first
 Entity timelines extend this by scoping to opaque entity Funes refs and traversing cited relationships before rendering grouped timeline layers.
 Current project state explanations compose state comparison and timeline reasoning with explicit inferences, contradiction surfacing, citations, and unsuppressible uncertainty.
 Past decision context reconstruction follows the same retrieve-first rule while separating recorded rationale from later inference and preserving citation/link identity through Funes refs and stack identity.
+Left-off context uses bounded history to detect the last confirmed work episode, reconstruct active work with cited evidence, rank context, and expose unresolved inferences/uncertainty for safe resumption.

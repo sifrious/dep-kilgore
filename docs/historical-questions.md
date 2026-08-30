@@ -75,3 +75,8 @@ It keeps facts, explicit inferences, contradiction signals, citations, and uncer
 
 Past decision context reconstructs the surrounding historical rationale for a decision from Funes provenance.
 It keeps recorded rationale distinct from later inference, preserves author as account id, links identities via `funes_ref`/stack identity, and models decision-citation edges with label/locator/position semantics.
+
+## Left-off context
+
+Left-off context answers what work was in progress at the last confirmed episode in bounded history.
+It combines explicit boundary detection, active-work reconstruction, evidence ranking, unresolved-context extraction, citations, and inference/uncertainty so resume UI can remain presentation-only.
