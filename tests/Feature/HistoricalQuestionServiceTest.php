@@ -18,20 +18,23 @@ use Sifrious\Kilgore\HistoricalQuestions\HistoricalQuestionService;
 use Sifrious\Kilgore\HistoricalQuestions\InferenceAssertion;
 
 it('retrieves evidence before interpretation', function (): void {
-    $events = [];
-
-    $retriever = new class($events) implements FunesEvidenceRetriever
+    $tracker = new class
     {
         /**
-         * @param array<int, string> $events
+         * @var array<int, string>
          */
-        public function __construct(private array &$events)
+        public array $events = [];
+    };
+
+    $retriever = new class($tracker) implements FunesEvidenceRetriever
+    {
+        public function __construct(private object $tracker)
         {
         }
 
         public function retrieve(HistoricalQuestion $question): EvidenceSet
         {
-            $this->events[] = 'retrieve';
+            $this->tracker->events[] = 'retrieve';
 
             return new EvidenceSet([
                 new EvidenceItem('funes:event:001', EvidenceKind::Other, 'Found a historical event'),
@@ -39,18 +42,15 @@ it('retrieves evidence before interpretation', function (): void {
         }
     };
 
-    $interpreter = new class($events) implements HistoricalInterpreter
+    $interpreter = new class($tracker) implements HistoricalInterpreter
     {
-        /**
-         * @param array<int, string> $events
-         */
-        public function __construct(private array &$events)
+        public function __construct(private object $tracker)
         {
         }
 
         public function interpret(HistoricalQuestion $question, EvidenceSet $evidence): HistoricalAnswer
         {
-            $this->events[] = 'interpret';
+            $this->tracker->events[] = 'interpret';
 
             return new HistoricalAnswer(
                 facts: [
@@ -70,11 +70,14 @@ it('retrieves evidence before interpretation', function (): void {
     $result = $service->ask(new HistoricalQuestion('What happened?'));
 
     expect($result->answered)->toBeTrue()
-        ->and($events)->toBe(['retrieve', 'interpret']);
+        ->and($tracker->events)->toBe(['retrieve', 'interpret']);
 });
 
 it('refuses interpretation when evidence is insufficient', function (): void {
-    $interpreterCalled = false;
+    $tracker = new class
+    {
+        public bool $interpreterCalled = false;
+    };
 
     $retriever = new class implements FunesEvidenceRetriever
     {
@@ -87,15 +90,15 @@ it('refuses interpretation when evidence is insufficient', function (): void {
         }
     };
 
-    $interpreter = new class($interpreterCalled) implements HistoricalInterpreter
+    $interpreter = new class($tracker) implements HistoricalInterpreter
     {
-        public function __construct(private bool &$interpreterCalled)
+        public function __construct(private object $tracker)
         {
         }
 
         public function interpret(HistoricalQuestion $question, EvidenceSet $evidence): HistoricalAnswer
         {
-            $this->interpreterCalled = true;
+            $this->tracker->interpreterCalled = true;
 
             return new HistoricalAnswer(
                 facts: [],
@@ -112,7 +115,7 @@ it('refuses interpretation when evidence is insufficient', function (): void {
     expect($result->answered)->toBeFalse()
         ->and($result->refusalReason?->code)->toBe('insufficient_evidence')
         ->and($result->completeness->missingExpectedEvidence)->toBe(['funes:decision:*', 'funes:plan:*'])
-        ->and($interpreterCalled)->toBeFalse();
+        ->and($tracker->interpreterCalled)->toBeFalse();
 });
 
 it('returns a typed traceable historical answer with distinct inference', function (): void {
