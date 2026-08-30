@@ -65,3 +65,8 @@ Timeline groups carry explicit temporal semantics (`exact_date` or `undated`) wi
 
 Entity timelines scope history by opaque `entityFunesRef`, traverse related entities with cited provenance, and build chronological layered events from that expanded evidence scope.
 Traversal uncertainty (for missing relationship evidence or sparse edges) remains explicit and cannot be suppressed.
+
+## Current project state explanation
+
+Current project state explanation composes current-vs-prior comparisons and project timelines to explain *why* the project is in its present state.
+It keeps facts, explicit inferences, contradiction signals, citations, and uncertainty distinct so applications only select project scope and render.

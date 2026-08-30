@@ -101,3 +101,4 @@ The same contract applies to period summaries: retrieve cited Funes evidence fir
 It also applies to current-versus-prior state comparison: retrieve baseline/current evidence first, then classify state changes with traceable citations and explicit uncertainty.
 Project timelines follow the same rule: retrieve structured Funes evidence first, then emit chronological, citation-linked observation/interpretation layers with explicit temporal semantics and uncertainty.
 Entity timelines extend this by scoping to opaque entity Funes refs and traversing cited relationships before rendering grouped timeline layers.
+Current project state explanations compose state comparison and timeline reasoning with explicit inferences, contradiction surfacing, citations, and unsuppressible uncertainty.
