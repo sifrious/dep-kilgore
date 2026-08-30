@@ -1,0 +1,76 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Sifrious\Kilgore\HistoricalQuestions;
+
+use DateTimeImmutable;
+
+enum EvidenceKind: string
+{
+    case Comparison = 'comparison';
+    case DecisionCitation = 'decision_citation';
+    case PlanSummary = 'plan_summary';
+    case ResearchClaimSource = 'research_claim_source';
+    case Other = 'other';
+}
+
+final class EvidenceItem
+{
+    /**
+     * @param array<string, scalar|null> $attributes
+     */
+    public function __construct(
+        public readonly string $funesRef,
+        public readonly EvidenceKind $kind,
+        public readonly string $summary,
+        public readonly ?DateTimeImmutable $occurredAt = null,
+        public readonly array $attributes = [],
+    ) {
+    }
+}
+
+final class EvidenceSet
+{
+    /**
+     * @param array<int, EvidenceItem> $items
+     * @param array<int, non-empty-string> $missingExpectedEvidence
+     */
+    public function __construct(
+        public readonly array $items,
+        public readonly array $missingExpectedEvidence = [],
+    ) {
+    }
+
+    public function isSufficient(): bool
+    {
+        return $this->items !== [];
+    }
+
+    /**
+     * @return array<int, non-empty-string>
+     */
+    public function refs(): array
+    {
+        return array_values(
+            array_map(
+                static fn (EvidenceItem $item): string => $item->funesRef,
+                $this->items,
+            ),
+        );
+    }
+
+    /**
+     * @return array<non-empty-string, EvidenceItem>
+     */
+    public function byRef(): array
+    {
+        $indexed = [];
+
+        foreach ($this->items as $item) {
+            $indexed[$item->funesRef] = $item;
+        }
+
+        return $indexed;
+    }
+}
